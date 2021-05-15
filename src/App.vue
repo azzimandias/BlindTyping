@@ -5,6 +5,20 @@
         <h2 class="controls__title">
           Blind Typing
         </h2>
+        <div class="controls__sentences">
+          <h5 class="controls__sentences-title">
+            Number of sentences:
+          </h5>
+          <select
+              class="controls__sentences-select"
+              v-model="sentencesNumber"
+              v-bind:disabled="isTraining">
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+        </div>
         <StartButton
             @changeIsTraining="changeIsTraining()"
         />
@@ -12,7 +26,7 @@
     </nav>
 
     <div class="training">
-      <div class="training__body">
+      <div class="training__body" :class="{ grid: isTraining }">
         <div class="training__info-body" v-if="!isTraining">
           <h2 class="training__info-title">
             Blind typing training web application.<br/>
@@ -22,7 +36,12 @@
         </div>
 
         <div class="training__start-body" v-else>
-
+          <TrainingText
+            :isTraining="isTraining"
+            :sentencesNumber="sentencesNumber"
+          />
+          <div class="training__accuracy"></div>
+          <div class="training__speed"></div>
         </div>
       </div>
     </div>
@@ -32,15 +51,18 @@
 
 <script>
 import StartButton from "@/components/StartButton";
+import TrainingText from "@/components/TrainingText";
 
 export default {
   name: 'App',
   components: {
     StartButton,
+    TrainingText,
   },
   data() {
     return {
       isTraining: false,
+      sentencesNumber: 10,
     }
   },
   methods: {
@@ -61,6 +83,8 @@ export default {
     margin: 0;
     box-sizing: border-box;
     border: none;
+    -moz-user-select: none;
+    user-select: none;
   }
 
   .app {
@@ -91,9 +115,13 @@ export default {
     border-radius: 5px;
   }
 
+  .controls__sentences {
+    display: flex;
+  }
+
   .training__body {
     max-width: 800px;
-    height: 700px;
+    min-height: 700px;
     margin: 0 auto;
     padding: 10px 30px;
 
@@ -103,6 +131,9 @@ export default {
 
     border: 1px solid black;
     border-radius: 5px;
+  }
+  .grid {
+    display: grid;
   }
 
   .training__info-body  {
@@ -121,11 +152,12 @@ export default {
     width: 400px;
     height: 5px;
     background: #6D7278;
+    border-radius: 5px;
   }
 
   .training__start-body {
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    //border: 1px solid black;
   }
 </style>

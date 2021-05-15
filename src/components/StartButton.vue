@@ -3,15 +3,13 @@
     <button
         class="SB__body-1"
         v-if="!isClicked"
-        @mouseup="changeIsTraining()"
-    >▶ Start training
-    </button>
+        @mouseup="changeIsClicked()"
+    >▶ Start training</button>
     <button
         class="SB__body-2"
         v-else
-        @mouseup="changeIsTraining()"
-    >◼ Stop
-    </button>
+        @mouseup="changeIsClicked()"
+    >◼ Stop training</button>
   </div>
 </template>
 
@@ -24,7 +22,7 @@ export default {
     }
   },
   methods: {
-    changeIsTraining() {
+    changeIsClicked() {
       this.isClicked = !this.isClicked;
       this.$emit('changeIsTraining');
     }
