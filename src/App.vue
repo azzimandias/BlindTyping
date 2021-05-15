@@ -3,7 +3,7 @@
     <nav class="controls">
       <div class="controls__body">
         <h2 class="controls__title">
-          Blind Typing
+          Blind Typing 👀
         </h2>
         <div class="controls__sentences">
           <h5 class="controls__sentences-title">
@@ -13,6 +13,7 @@
               class="controls__sentences-select"
               v-model="sentencesNumber"
               v-bind:disabled="isTraining">
+            <option>1</option>
             <option>5</option>
             <option>10</option>
             <option>15</option>
@@ -31,7 +32,7 @@
           <h2 class="training__info-title">
             Blind typing training web application.<br/>
             Implemented using the Vue framework.<br/>
-            Click 'Start training' to run.<br/>
+            Click 'Start training' to run. 👨‍💻<br/>
           </h2>
         </div>
 
@@ -62,13 +63,13 @@ export default {
   data() {
     return {
       isTraining: false,
-      sentencesNumber: 10,
+      sentencesNumber: 1,
     }
   },
   methods: {
     changeIsTraining() {
       this.isTraining = !this.isTraining;
-    }
+    },
   },
   computed: {
 
@@ -78,7 +79,7 @@ export default {
 
 <style>
   * {
-    background-color: white;
+    background-color: cornsilk;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -115,7 +116,13 @@ export default {
     border-radius: 5px;
   }
 
+  .controls__title {
+    min-width: 185px;
+    margin-bottom: 5px;
+  }
+
   .controls__sentences {
+    min-width: 185px;
     display: flex;
   }
 

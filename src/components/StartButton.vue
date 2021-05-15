@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
   .SB__body-1 {
-    width: 150px;
+    min-width: 185px;
     height: 40px;
     background-color: aquamarine;
     font-size: 15px;
@@ -42,7 +42,7 @@ export default {
   }
 
   .SB__body-2 {
-    width: 150px;
+    min-width: 185px;
     height: 40px;
     background-color: tomato;
     font-size: 15px;
