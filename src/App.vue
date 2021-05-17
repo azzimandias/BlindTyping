@@ -3,7 +3,7 @@
     <nav class="controls">
       <div class="controls__body">
         <h2 class="controls__title">
-          Blind Typing 👀
+          Blind Typing &#128064;
         </h2>
         <div class="controls__sentences">
           <h5 class="controls__sentences-title">
@@ -27,23 +27,20 @@
     </nav>
 
     <div class="training">
-      <div class="training__body" :class="{ grid: isTraining }">
+      <div class="training__body" :class="{ flex_sb: isTraining }">
         <div class="training__info-body" v-if="!isTraining">
           <h2 class="training__info-title">
             Blind typing training web application.<br/>
             Implemented using the Vue framework.<br/>
-            Click 'Start training' to run. 👨‍💻<br/>
+            Click 'Start training' to run. &#x1F468;&#x200D;&#x1F4BB;<br/>
           </h2>
         </div>
 
-        <div class="training__start-body" v-else>
-          <TrainingText
+        <TrainingText
             :isTraining="isTraining"
             :sentencesNumber="sentencesNumber"
-          />
-          <div class="training__accuracy"></div>
-          <div class="training__speed"></div>
-        </div>
+            v-else
+        />
       </div>
     </div>
 
@@ -63,7 +60,7 @@ export default {
   data() {
     return {
       isTraining: false,
-      sentencesNumber: 1,
+      sentencesNumber: 5,
     }
   },
   methods: {
@@ -79,7 +76,8 @@ export default {
 
 <style>
   * {
-    background-color: cornsilk;
+    //background-color: aliceblue;
+    background-color: white;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -94,6 +92,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    //color: dimgray;
   }
 
   .controls {
@@ -112,6 +111,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 
+    background-color: aliceblue;
     border: 1px solid black;
     border-radius: 5px;
   }
@@ -119,11 +119,21 @@ export default {
   .controls__title {
     min-width: 185px;
     margin-bottom: 5px;
+    background-color: inherit;
+  }
+
+  .controls__sentences-select {
+    background-color: aliceblue;
+  }
+
+  .controls__sentences-title {
+    background-color: aliceblue;
   }
 
   .controls__sentences {
     min-width: 185px;
     display: flex;
+    background-color: inherit;
   }
 
   .training__body {
@@ -136,11 +146,17 @@ export default {
     flex-direction: column;
     justify-content: center;
 
+    background-color: aliceblue;
     border: 1px solid black;
     border-radius: 5px;
   }
-  .grid {
-    display: grid;
+
+  .flex_sb {
+    justify-content: space-between;
+  }
+
+  .training__info-title {
+    background-color: inherit;
   }
 
   .training__info-body  {
@@ -148,6 +164,7 @@ export default {
     max-width: 75%;
     margin: 0 auto 30%;
     padding: 0 10px;
+    background-color: inherit;
     //border: 1px solid black;
   }
 
@@ -160,11 +177,5 @@ export default {
     height: 5px;
     background: #6D7278;
     border-radius: 5px;
-  }
-
-  .training__start-body {
-    width: 100%;
-    height: 100%;
-    //border: 1px solid black;
   }
 </style>

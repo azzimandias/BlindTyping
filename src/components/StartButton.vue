@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="SB">
     <button
         class="SB__body-1"
         v-if="!isClicked"
@@ -31,6 +31,10 @@ export default {
 </script>
 
 <style scoped>
+  .SB {
+    background-color: aliceblue;
+  }
+
   .SB__body-1 {
     min-width: 185px;
     height: 40px;
