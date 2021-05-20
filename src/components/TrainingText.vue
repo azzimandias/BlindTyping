@@ -1,27 +1,37 @@
 <template>
  <div class="training__text-body">
-   <div class="training__typing">
+   <div class="training__typing" v-show="!trainingIsEnded">
      <p class="training__text aquamarine">{{ usersText }}</p>
-     <p class="training__text bisque" :class="{ tomato: isTypo }">{{ currentSymbol }}</p>
+     <p class="training__text bisque" :class="{ tomato: this.isTypo }">{{ currentSymbol }}</p>
      <p class="training__text" v-if="!isLoaded">Receive text from the server...</p>
      <p class="training__text" v-else>{{ receivedText }}</p>
      <input
          id="super"
          type="text"
          v-model="inputSymbol"
-         @keypress="eva($event)"
+         @keypress="eventTransfer($event)"
          @blur="onFocus()"
      />
    </div>
-   <div class="training__watchers">
-     <TrainingAccuracy
-         :numberOfSymbols="numberOfSymbols"
-         :isTypo="isTypo"
-         :key="rerender"
-     />
-     <TrainingSpeed
-        :usersText="usersText"
-        :isTyping="isTyping"
+   <div class="training__watchers" :class="{ training_end: this.trainingIsEnded}">
+     <h2 class="training__watchers-title" v-if="trainingIsEnded">Congratulations!<br/>Your results:</h2>
+     <div class="training__watchers-results"
+          :class="{ 'training__watchers-results_half': trainingIsEnded}">
+       <TrainingAccuracy
+           :numberOfSymbols="numberOfSymbols"
+           :isTyping="isTyping"
+           :isTypo="isTypo"
+           :key="keyToRerender"
+       />
+       <TrainingSpeed
+          :usersText="usersText"
+          :isTyping="isTyping"
+          :trainingIsEnded="trainingIsEnded"
+       />
+     </div>
+     <StartOverButton
+         v-if="trainingIsEnded"
+         @rerenderTrainingText="rerenderTrainingText()"
      />
    </div>
  </div>
@@ -30,20 +40,22 @@
 <script>
 import TrainingAccuracy from "@/components/TrainingAccuracy";
 import TrainingSpeed from "@/components/TrainingSpeed";
+import StartOverButton from "@/components/StartOverButton";
 
 export default {
   name: "TrainingText",
   components: {
     TrainingAccuracy,
     TrainingSpeed,
+    StartOverButton,
   },
-  props: ['isTraining', 'sentencesNumber'],
+  props: ['isTraining', 'trainingIsEnded', 'sentencesNumber'],
   data() {
     return {
       initText: this.getApiText().then(data => {
         this.receivedText = data[0];
         this.numberOfSymbols = this.receivedText.length;
-        this.forceRerender();
+        this.forceRerenderComponent();
         this.isLoaded = true;
         this.onFocus();
         this.symbolSubstitution();
@@ -51,7 +63,7 @@ export default {
         console.error(err);
         alert('Issue or error\n' + err);
       }),
-      rerender: 0,
+      keyToRerender: 0,
       numberOfSymbols: 0,
       receivedText: '',
       usersText: '',
@@ -70,7 +82,7 @@ export default {
             return  response.json();
           });
     },
-    eva(event) {
+    eventTransfer(event) {
       this.symbolCompare(event);
       this.isTyping = true;
     },
@@ -85,25 +97,27 @@ export default {
       } else {
         this.isTypo = true;
         this.inputSymbol = '';
-        TrainingAccuracy.methods.wasTypo();
       }
     },
     symbolSubstitution() {
-      if(!this.isTypo) {
-        if (this.receivedText.charAt(0) === ' ') {
-          this.currentSymbol = '\u00A0';
-        } else {
-          this.currentSymbol = this.receivedText.charAt(0);
-        }
-        this.receivedText = this.receivedText.slice(1);
+      if (this.receivedText.charAt(0) === ' ') {
+        this.currentSymbol = '\u00A0';
+      } else if (!this.receivedText) {
+        this.$emit('changeTrainingIsEnded');
+      } else {
+        this.currentSymbol = this.receivedText.charAt(0);
       }
+      this.receivedText = this.receivedText.slice(1);
     },
     onFocus() {
       let elem = document.getElementById("super");
-      elem.focus();
+      if (elem) elem.focus();
     },
-    forceRerender() {
-      this.rerender++;
+    forceRerenderComponent() {
+      this.keyToRerender++;
+    },
+    rerenderTrainingText() {
+      this.$emit('rerenderTrainingText');
     }
   }
 }
@@ -112,26 +126,19 @@ export default {
 <style scoped>
   .training__text-body {
     width: 100%;
-    height: 100%;
+    min-height: 700px;
     text-align: justify;
-    flex-grow: 1;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    background-color: transparent;
-    //border: 1px solid white;
   }
 
   #super {
     position: absolute;
     top: -10%;
     left: 0;
-  }
-
-  .training__typing {
-    background-color: transparent;
+    opacity: 0;
   }
 
   .training__text {
@@ -139,29 +146,46 @@ export default {
     font-size: 25px;
     font-weight: 400;
     line-height: 35px;
-    background-color: transparent;
   }
 
   .training__watchers {
     display: flex;
-    justify-content: space-around;
-    background-color: inherit;
+    margin-top: 30px;
+  }
+
+  .training_end {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: auto;
+  }
+
+  .training__watchers-title {
+    text-align: center;
+  }
+
+  .training__watchers-results {
+    display: flex;
+    width: 100%;
+    margin: 50px 0;
+    justify-content: space-between;
+  }
+
+  .training__watchers-results_half {
+    width: 50%;
   }
 
   .aquamarine {
-    color: aquamarine;
+    color: darkseagreen;
   }
 
   .bisque {
-    display: inline-block;
     text-align: center;
     background-color: bisque;
-    border: 1px solid bisque;
     border-radius: 5px;
   }
 
   .tomato {
-    background-color: tomato;
-    border: 1px solid tomato;
+    background-color: crimson;
   }
 </style>

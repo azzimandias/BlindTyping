@@ -5,17 +5,16 @@
 <script>
 export default {
   name: "TrainingAccuracy",
-  props: ['numberOfSymbols', 'isTypo'],
+  props: ['numberOfSymbols', 'isTyping', 'isTypo'],
   data() {
     return {
       accuracyValuePercent: 100,
-      oneTypoPercent: (100/this.numberOfSymbols).toFixed(1),
+      oneTypoPercent: 100 / this.numberOfSymbols,
     }
   },
   methods: {
     wasTypo() {
-      if (this.isTypo) {
-        console.log('this.oneTypoPercentP')
+      if (this.isTyping && this.isTypo) {
         this.accuracyValuePercent -= this.oneTypoPercent;
       }
     }
@@ -23,7 +22,11 @@ export default {
   computed: {
     rerenderAccuracy() {
       this.wasTypo();
-      return this.accuracyValuePercent.toFixed(1);
+      console.log('1');
+      if (!Number.isInteger(this.accuracyValuePercent)) {
+        return this.accuracyValuePercent.toFixed(1);
+      }
+      return this.accuracyValuePercent;
     }
   }
 }
@@ -35,7 +38,6 @@ export default {
     min-height: 20px;
     text-align: center;
     margin: auto 0;
-    background-color: transparent;
-    //border: 1px solid black;
+    font-weight: 600;
   }
 </style>

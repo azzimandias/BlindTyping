@@ -17,17 +17,16 @@
             <option>5</option>
             <option>10</option>
             <option>15</option>
-            <option>20</option>
           </select>
         </div>
         <StartButton
+            :trainingIsEnded="trainingIsEnded"
             @changeIsTraining="changeIsTraining()"
         />
       </div>
     </nav>
-
     <div class="training">
-      <div class="training__body" :class="{ flex_sb: isTraining }">
+      <div class="training__body">
         <div class="training__info-body" v-if="!isTraining">
           <h2 class="training__info-title">
             Blind typing training web application.<br/>
@@ -35,15 +34,17 @@
             Click 'Start training' to run. &#x1F468;&#x200D;&#x1F4BB;<br/>
           </h2>
         </div>
-
         <TrainingText
             :isTraining="isTraining"
+            :trainingIsEnded="trainingIsEnded"
             :sentencesNumber="sentencesNumber"
+            :key="ketToRerender"
+            @changeTrainingIsEnded="changeTrainingIsEnded()"
+            @rerenderTrainingText="rerenderTrainingText()"
             v-else
         />
       </div>
     </div>
-
   </div>
 </template>
 
@@ -60,24 +61,30 @@ export default {
   data() {
     return {
       isTraining: false,
-      sentencesNumber: 5,
+      trainingIsEnded: false,
+      sentencesNumber: 1,
+      ketToRerender: 0,
     }
   },
   methods: {
     changeIsTraining() {
       this.isTraining = !this.isTraining;
+      if (this.trainingIsEnded) this.changeTrainingIsEnded();
     },
-  },
-  computed: {
-
+    changeTrainingIsEnded() {
+      this.trainingIsEnded = !this.trainingIsEnded;
+    },
+    rerenderTrainingText() {
+      this.changeTrainingIsEnded();
+      this.ketToRerender++;
+    }
   }
 }
 </script>
 
 <style>
   * {
-    //background-color: aliceblue;
-    background-color: white;
+    background-color: transparent;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -92,13 +99,12 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    //color: dimgray;
   }
 
   .controls {
     width: 100%;
     margin: 10px 0;
-    //border: 1px solid black;
+    padding: 0 10px;
   }
 
   .controls__body {
@@ -118,22 +124,21 @@ export default {
 
   .controls__title {
     min-width: 185px;
-    margin-bottom: 5px;
-    background-color: inherit;
-  }
-
-  .controls__sentences-select {
-    background-color: aliceblue;
-  }
-
-  .controls__sentences-title {
-    background-color: aliceblue;
+    min-height: 48px;
+    padding-top: 6px;
+    text-align: center;
   }
 
   .controls__sentences {
     min-width: 185px;
+    min-height: 48px;
     display: flex;
-    background-color: inherit;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .training {
+    padding: 0 10px;
   }
 
   .training__body {
@@ -142,30 +147,20 @@ export default {
     margin: 0 auto;
     padding: 10px 30px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
     background-color: aliceblue;
     border: 1px solid black;
     border-radius: 5px;
   }
 
-  .flex_sb {
-    justify-content: space-between;
-  }
-
-  .training__info-title {
-    background-color: inherit;
-  }
-
   .training__info-body  {
     position: relative;
     max-width: 75%;
-    margin: 0 auto 30%;
+    margin: 100px auto auto;
     padding: 0 10px;
-    background-color: inherit;
-    //border: 1px solid black;
+  }
+
+  .training__info-title {
+    line-height: 50px;
   }
 
   .training__info-body::after {
@@ -178,4 +173,6 @@ export default {
     background: #6D7278;
     border-radius: 5px;
   }
+
+
 </style>
