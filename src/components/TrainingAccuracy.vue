@@ -22,7 +22,6 @@ export default {
   computed: {
     rerenderAccuracy() {
       this.wasTypo();
-      console.log('1');
       if (!Number.isInteger(this.accuracyValuePercent)) {
         return this.accuracyValuePercent.toFixed(1);
       }
@@ -39,5 +38,17 @@ export default {
     text-align: center;
     margin: auto 0;
     font-weight: 600;
+  }
+
+  @media screen and (max-width: 696px) {
+    .training__accuracy {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .training__accuracy {
+      font-size: 10px;
+    }
   }
 </style>

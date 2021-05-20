@@ -1,4 +1,9 @@
-# blind-typing
+# Blind Typing
+
+Blind typing training web application. Implemented using the Vue framework.<br/>
+Test the functionality [here]().
+
+---
 
 ## Project setup
 ```

@@ -188,4 +188,34 @@ export default {
   .tomato {
     background-color: crimson;
   }
+
+  @media screen and (max-width: 768px) {
+    .training__text {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: 549px) {
+    .training__text {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .training__text {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .training__text {
+      font-size: 10px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .training__text {
+      font-size: 8px;
+    }
+  }
 </style>

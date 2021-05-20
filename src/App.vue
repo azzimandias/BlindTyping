@@ -22,6 +22,7 @@
         <StartButton
             :trainingIsEnded="trainingIsEnded"
             @changeIsTraining="changeIsTraining()"
+            @changeTrainingIsEnded="changeTrainingIsEnded()"
         />
       </div>
     </nav>
@@ -144,7 +145,7 @@ export default {
   .training__body {
     max-width: 800px;
     min-height: 700px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     padding: 10px 30px;
 
     background-color: aliceblue;
@@ -174,5 +175,84 @@ export default {
     border-radius: 5px;
   }
 
+  @media screen and (max-width: 703px) {
+    .controls__title {
+      min-width: 155px;
+      font-size: 18px;
+      padding-top: 10px;
+    }
 
+    .controls__sentences {
+      min-width: 155px;
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .controls__sentences-title {
+      font-size: 10px;
+    }
+
+    .training__info-title {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 549px) {
+      .controls__body {
+        padding: 10px 15px;
+      }
+
+      .controls__title {
+        min-width: 100px;
+        font-size: 15px;
+        padding-top: 12px;
+      }
+
+      .controls__sentences {
+        min-width: 100px;
+      }
+
+      .controls__sentences-title {
+        font-size: 10px;
+      }
+
+      .training__info-title {
+        font-size: 13px;
+      }
+
+      .training__info-body::after {
+        left: calc(50% - 100px);
+        width: 200px;
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      .controls__title {
+        min-width: 90px;
+        font-size: 11px;
+        padding-top: 16px;
+      }
+
+      .controls__sentences {
+        min-width: 90px;
+      }
+
+      .controls__sentences-title {
+        display: none;
+      }
+
+      .training__info-title {
+        font-size: 10px;
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      .training__info-title {
+        font-size: 8px;
+      }
+
+      .training__info-body::after {
+        height: 2px;
+      }
+    }
+  }
 </style>

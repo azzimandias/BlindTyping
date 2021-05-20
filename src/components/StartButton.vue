@@ -17,11 +17,12 @@ export default {
       isButtonClicked: false,
       strStart: '▶ Start training',
       strStop: '◼ Stop training',
-      strMenu: '← To main menu',
+      strMenu: 'To main menu',
     }
   },
   methods: {
     changeIsButtonClicked() {
+      if (this.isButtonClicked) this.$emit('changeTrainingIsEnded');
       this.isButtonClicked = !this.isButtonClicked;
       this.$emit('changeIsTraining');
     }
@@ -41,10 +42,6 @@ export default {
 </script>
 
 <style scoped>
-  .SB {
-    background-color: aliceblue;
-  }
-
   .SB__body {
     min-width: 185px;
     height: 40px;
@@ -61,5 +58,25 @@ export default {
 
   .SB__body_2 {
     background-color: cadetblue;
+  }
+
+  @media screen and (max-width: 703px) {
+    .SB__body {
+      min-width: 155px;
+    }
+  }
+
+  @media screen and (max-width: 549px) {
+    .SB__body {
+      min-width: 100px;
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .SB__body {
+      min-width: 90px;
+      font-size: 8px;
+    }
   }
 </style>

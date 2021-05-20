@@ -12,7 +12,8 @@ export default {
       totalTypingSpeed: 0,
       usersTextLengthOld: this.usersText.length,
       totalLengthSpeed: 0,
-      minute: 60,
+      minusSpeed: 0,
+      minute: 0,
       flag: true,
       timer: '',
     }
@@ -25,6 +26,8 @@ export default {
           if (this.trainingIsEnded) {
             clearInterval(this.timer);
           } else if (this.usersText.length - this.usersTextLengthOld) {
+            this.typingSpeed -= this.minusSpeed;
+            this.minusSpeed = 0;
             this.totalLengthSpeed++;
             this.typingSpeed += this.symbolsPerMinuteInSec;
             this.totalTypingSpeed = this.typingSpeed / this.totalLengthSpeed;
@@ -33,9 +36,11 @@ export default {
           } else {
             if (!this.minute) return;
             this.totalTypingSpeed -= this.symbolsPerSecond;
-            this.typingSpeed -= this.symbolsPerSecond;
+            this.minusSpeed += this.symbolsPerSecond;
             this.minute--;
           }
+          /*console.log(this.usersText.length);
+          console.log(Math.round(this.totalTypingSpeed));*/
         }, 1000);
       }
       return Math.round(this.totalTypingSpeed);
@@ -47,6 +52,7 @@ export default {
     },
     symbolsPerSecond() {
       return (this.typingSpeed / this.totalLengthSpeed) / 60;
+      //return parseFloat(((this.typingSpeed / this.totalLengthSpeed) / 60).toFixed(2));
     }
   }
 }
@@ -59,5 +65,17 @@ export default {
     text-align: center;
     margin: auto 0;
     font-weight: 600;
+  }
+
+  @media screen and (max-width: 696px) {
+    .training__speed {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .training__speed {
+      font-size: 10px;
+    }
   }
 </style>
