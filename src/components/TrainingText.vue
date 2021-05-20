@@ -8,6 +8,7 @@
      <input
          id="super"
          type="text"
+         inputmode="text"
          v-model="inputSymbol"
          @keypress="eventTransfer($event)"
          @blur="onFocus()"
