@@ -126,7 +126,7 @@ export default {
 <style scoped>
   .training__text-body {
     width: 100%;
-    min-height: 700px;
+    min-height: calc(100vh - 122px);
     text-align: justify;
 
     display: flex;

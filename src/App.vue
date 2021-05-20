@@ -144,7 +144,7 @@ export default {
 
   .training__body {
     max-width: 800px;
-    min-height: 700px;
+    min-height: calc(100vh - 100px);
     margin: 0 auto 10px;
     padding: 10px 30px;
 
