@@ -8,6 +8,7 @@
      <input
          id="super"
          type="text"
+         name="text"
          inputmode="text"
          v-model="inputSymbol"
          @keypress="eventTransfer($event)"
@@ -112,7 +113,10 @@ export default {
     },
     onFocus() {
       let elem = document.getElementById("super");
-      if (elem) elem.focus();
+      if (elem) {
+        elem.focus();
+        elem.click();
+      }
     },
     forceRerenderComponent() {
       this.keyToRerender++;
