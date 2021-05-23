@@ -2,7 +2,11 @@
  <div class="training__text-body">
    <div class="training__typing" v-show="!trainingIsEnded">
      <p class="training__text aquamarine">{{ usersText }}</p>
-     <p class="training__text bisque" :class="{ tomato: this.isTypo }">{{ currentSymbol }}</p>
+     <p class="training__text bisque" :class="{
+       tomato: this.isTypo,
+       space: this.isInlineBlock
+     }"
+     >{{ currentSymbol }}</p>
      <p class="training__text" v-if="!isLoaded">Receive text from the server...</p>
      <p class="training__text" v-else>{{ receivedText }}</p>
      <input
@@ -73,6 +77,7 @@ export default {
       isTypo: false,
       isTyping: false,
       isLoaded: false,
+      isInlineBlock: false,
     }
   },
   methods: {
@@ -89,7 +94,7 @@ export default {
     },
     symbolCompare(event) {
       if (event.key === this.currentSymbol ||
-          (event.key === ' ' && this.currentSymbol === ' ')) {
+          (event.key === ' ' && this.currentSymbol === '\u00A0')) {
         this.usersText += event.key;
         this.inputSymbol = '';
         this.isTypo = false;
@@ -102,11 +107,13 @@ export default {
     },
     symbolSubstitution() {
       if (this.receivedText.charAt(0) === ' ') {
-        this.currentSymbol = ' ';
+        this.currentSymbol = '\u00A0';
+        this.isInlineBlock = true;
       } else if (!this.receivedText) {
         this.$emit('changeTrainingIsEnded');
       } else {
         this.currentSymbol = this.receivedText.charAt(0);
+        this.isInlineBlock = false;
       }
       this.receivedText = this.receivedText.slice(1);
     },
@@ -131,7 +138,7 @@ export default {
   .training__text-body {
     width: 100%;
     min-height: calc(100vh - 122px);
-    text-align: justify;
+    text-align: left;
 
     display: flex;
     flex-direction: column;
@@ -187,6 +194,10 @@ export default {
     text-align: center;
     background-color: bisque;
     border-radius: 5px;
+  }
+
+  .space {
+    display: inline-block;
   }
 
   .tomato {
