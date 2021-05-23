@@ -9,7 +9,6 @@
          id="super"
          type="text"
          name="text"
-         inputmode="text"
          v-model="inputSymbol"
          @keypress="eventTransfer($event)"
          @blur="onFocus()"
@@ -90,7 +89,7 @@ export default {
     },
     symbolCompare(event) {
       if (event.key === this.currentSymbol ||
-          (event.key === ' ' && this.currentSymbol === '\u00A0')) {
+          (event.key === ' ' && this.currentSymbol === ' ')) {
         this.usersText += event.key;
         this.inputSymbol = '';
         this.isTypo = false;
@@ -103,7 +102,7 @@ export default {
     },
     symbolSubstitution() {
       if (this.receivedText.charAt(0) === ' ') {
-        this.currentSymbol = '\u00A0';
+        this.currentSymbol = ' ';
       } else if (!this.receivedText) {
         this.$emit('changeTrainingIsEnded');
       } else {
