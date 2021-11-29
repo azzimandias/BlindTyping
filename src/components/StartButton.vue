@@ -45,19 +45,19 @@ export default {
   .SB__body {
     min-width: 185px;
     height: 40px;
-    background-color: darkseagreen;
+    background-color: var(--aquamarine-color);
     font-size: 15px;
     font-weight: 600;
-    border: 1px solid black;
+    border: 1px solid var(--borders-color);
     border-radius: 20px;
   }
 
   .SB__body_1 {
-    background-color: crimson;
+    background-color: var(--tomato-color);
   }
 
   .SB__body_2 {
-    background-color: cadetblue;
+    background-color: var(--SB-2-color);
   }
 
   @media screen and (max-width: 703px) {

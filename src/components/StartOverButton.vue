@@ -22,10 +22,10 @@ export default {
   .SOB__body {
     width: 185px;
     height: 40px;
-    background-color: bisque;
+    background-color: var(--bisque-color);
     font-size: 15px;
     font-weight: 600;
-    border: 1px solid black;
+    border: 1px solid var(--borders-color);
     border-radius: 20px;
   }
 </style>

@@ -187,22 +187,21 @@ export default {
   }
 
   .aquamarine {
-    color: darkseagreen;
+    color: var(--aquamarine-color);
   }
 
   .bisque {
     text-align: center;
-    background-color: bisque;
+    background-color: var(--bisque-color);
     border-radius: 5px;
   }
 
   .space {
     display: inline-block;
-    //height: 35px;
   }
 
   .tomato {
-    background-color: crimson;
+    background-color: var(--tomato-color);
   }
 
   @media screen and (max-width: 768px) {

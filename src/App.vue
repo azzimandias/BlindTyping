@@ -5,6 +5,7 @@
         <h2 class="controls__title">
           Blind Typing &#128064;
         </h2>
+        <ThemeSwitcher/>
         <div class="controls__sentences">
           <h5 class="controls__sentences-title">
             Number of sentences:
@@ -50,12 +51,14 @@
 </template>
 
 <script>
+import ThemeSwitcher from "./components/ThemeSwitcher";
 import StartButton from "@/components/StartButton";
 import TrainingText from "@/components/TrainingText";
 
 export default {
   name: 'App',
   components: {
+    ThemeSwitcher,
     StartButton,
     TrainingText,
   },
@@ -85,13 +88,25 @@ export default {
 
 <style>
   * {
-    background-color: transparent;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     border: none;
     -moz-user-select: none;
     user-select: none;
+    transition: 0.3s;
+  }
+
+  body {
+    background-color: var(--back-color);
+  }
+
+  div, select, h2, h5, p {
+    background-color: inherit;
+  }
+
+  button, select {
+    color: var(--text-color);
   }
 
   .app {
@@ -99,7 +114,7 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: var(--text-color);
   }
 
   .controls {
@@ -118,8 +133,8 @@ export default {
     justify-content: space-between;
     align-items: center;
 
-    background-color: aliceblue;
-    border: 1px solid black;
+    background-color: var(--bodys-back);
+    border: 1px solid var(--borders-color);
     border-radius: 5px;
   }
 
@@ -148,8 +163,8 @@ export default {
     margin: 0 auto 10px;
     padding: 10px 30px;
 
-    background-color: aliceblue;
-    border: 1px solid black;
+    background-color: var(--bodys-back);
+    border: 1px solid var(--borders-color);
     border-radius: 5px;
   }
 
@@ -171,7 +186,7 @@ export default {
     bottom: -20%;
     width: 400px;
     height: 5px;
-    background: #6D7278;
+    background: var(--training-back);
     border-radius: 5px;
   }
 

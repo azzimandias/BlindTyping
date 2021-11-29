@@ -1,0 +1,15 @@
+:root {
+    --back-color: white;
+    --text-color: #2c3e50;
+    --bodys-back: aliceblue;
+    --borders-color: black;
+    --training-back: #6D7278;
+    --aquamarine-color: darkseagreen;
+    --bisque-color: bisque;
+    --tomato-color: crimson;
+    --SB-2-color: cadetblue;
+    --inverter-color-1: aliceblue;
+    --inverter-color-2: #2c3e50;
+    --invert-1: invert(1);
+    --invert-2: invert(0);
+}
