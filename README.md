@@ -1,4 +1,4 @@
-# Blind Typing
+![img](./src/assets/forREADME/logo.png)
 
 Blind typing training web application. Implemented using the Vue framework.<br/>
 Test the functionality [here](https://azzimandias.github.io/BlindTyping/).

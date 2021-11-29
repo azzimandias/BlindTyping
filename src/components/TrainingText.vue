@@ -3,10 +3,9 @@
    <div class="training__typing" v-show="!trainingIsEnded">
      <p class="training__text aquamarine">{{ usersText }}</p>
      <p class="training__text bisque" :class="{
-       tomato: this.isTypo,
-       space: this.isInlineBlock
-     }"
-     >{{ currentSymbol }}</p>
+                                        tomato: this.isTypo,
+                                        space: this.isInlineBlock
+                                       }">{{ currentSymbol }}</p>
      <p class="training__text" v-if="!isLoaded">Receive text from the server...</p>
      <p class="training__text" v-else>{{ receivedText }}</p>
      <input
@@ -57,17 +56,7 @@ export default {
   props: ['isTraining', 'trainingIsEnded', 'sentencesNumber'],
   data() {
     return {
-      initText: this.getApiText().then(data => {
-        this.receivedText = data[0];
-        this.numberOfSymbols = this.receivedText.length;
-        this.forceRerenderComponent();
-        this.isLoaded = true;
-        this.onFocus();
-        this.symbolSubstitution();
-      }).catch(err => {
-        console.error(err);
-        alert('Issue or error\n' + err);
-      }),
+      initText: this.getApiText(),
       keyToRerender: 0,
       numberOfSymbols: 0,
       receivedText: '',
@@ -84,8 +73,18 @@ export default {
     getApiText() {
       return fetch('https://baconipsum.com/api/?type=all-meat&sentences=' +
                     this.sentencesNumber)
-          .then(response => {
-            return  response.json();
+          .then(response => response.json())
+          .then(data => {
+            this.receivedText = data[0];
+            this.numberOfSymbols = this.receivedText.length;
+            this.forceRerenderComponent();
+            this.isLoaded = true;
+            this.onFocus();
+            this.symbolSubstitution();
+          })
+          .catch(err => {
+            console.error(err);
+            alert('Issue or error\n' + err);
           });
     },
     eventTransfer(event) {
@@ -120,6 +119,7 @@ export default {
     onFocus() {
       let elem = document.getElementById("super");
       if (elem) {
+        elem.blur();
         elem.focus();
         elem.click();
       }
@@ -198,6 +198,7 @@ export default {
 
   .space {
     display: inline-block;
+    //height: 35px;
   }
 
   .tomato {

@@ -39,7 +39,7 @@
             :isTraining="isTraining"
             :trainingIsEnded="trainingIsEnded"
             :sentencesNumber="sentencesNumber"
-            :key="ketToRerender"
+            :key="keyToRerender"
             @changeTrainingIsEnded="changeTrainingIsEnded()"
             @rerenderTrainingText="rerenderTrainingText()"
             v-else
@@ -64,7 +64,7 @@ export default {
       isTraining: false,
       trainingIsEnded: false,
       sentencesNumber: 1,
-      ketToRerender: 0,
+      keyToRerender: 0,
     }
   },
   methods: {
@@ -77,7 +77,7 @@ export default {
     },
     rerenderTrainingText() {
       this.changeTrainingIsEnded();
-      this.ketToRerender++;
+      this.keyToRerender++;
     }
   }
 }
