@@ -1,4 +1,4 @@
-![img](./src/assets/forREADME/logo.png)
+<h1 style="color: #2c3e50">Blind Typing 👀</h1>
 
 Blind typing training web application. Implemented using the Vue framework.<br/>
 Test the functionality [here](https://azzimandias.github.io/BlindTyping/).
