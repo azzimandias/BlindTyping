@@ -204,7 +204,7 @@ export default {
     background-color: var(--tomato-color);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 780px) {
     .training__text {
       font-size: 20px;
     }

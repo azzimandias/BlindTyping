@@ -190,7 +190,7 @@ export default {
     border-radius: 5px;
   }
 
-  @media screen and (max-width: 703px) {
+  @media screen and (max-width: 780px) {
     .controls__title {
       min-width: 155px;
       font-size: 18px;

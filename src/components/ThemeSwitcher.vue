@@ -48,8 +48,8 @@ export default {
         this.arrowFlag = !this.arrowFlag;
       }
       else if (this.arrowFlag || event.type === 'scroll') {
-        arrow.className += ' arrow--un-clicked';
-        switcher.className += ' switcher--close';
+        arrow.classList.add('arrow--un-clicked');
+        switcher.classList.add('switcher--close');
         this.arrowFlag = !this.arrowFlag;
       }
     },
@@ -198,7 +198,7 @@ export default {
   .switcher__status {
     filter: var(--invert-2);
   }
-  /*@media screen and (max-width: 720px) {
+  @media screen and (max-width: 780px) {
     .themes {
       width: 92px;
       height: 32px;
@@ -217,7 +217,7 @@ export default {
       background-size: 26px;
     }
   }
-  @media screen and (max-width: 515px) {
+  /*@media screen and (max-width: 515px) {
     .themes {
       display: block;
       width: 0;
