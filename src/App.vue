@@ -94,11 +94,11 @@ export default {
     border: none;
     -moz-user-select: none;
     user-select: none;
-    transition: 0.3s;
   }
 
   body {
     background-color: var(--back-color);
+    transition: 0.3s;
   }
 
   div, select, h2, h5, p {

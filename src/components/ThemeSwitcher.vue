@@ -120,7 +120,6 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border: none;
-    transition: 0.3s;
   }
   .switcher--close {
     margin-left: 0;
